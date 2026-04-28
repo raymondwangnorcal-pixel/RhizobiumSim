@@ -1,0 +1,8 @@
+This project uses game theory as a method to study competition between two types of rhizobium bacteria: Lux and Marshall. 
+Rhizobium are bacteria that live near plant roots and help plants grow by converting nitrogen from the atmosphere into a usable state for plants. 
+However, not all rhizobium types help plants equally, with some types resulting in more plant growth or stronger root nodules. 
+This paper will use a rhizobium dataset of Lux and Marshall bacteria under high-nitrogen and low-nitrogen conditions to gather two variables 
+as measures of fitness, which are Plant Weight and Estimated Nodule Weight, while will be combined to build payoff matrices. Replicator dynamics, 
+a method of analyzing evolutionary game theory, will then be used to predict which rhizobium type will become more common over time and what the 
+overall equilibrium will be between Lux and Marshall for both conditions. Our model indicates that Lux is favored over Marshall in both high-nitrogen
+and low-nitrogen environments.
