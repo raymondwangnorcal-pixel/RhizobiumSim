@@ -19,6 +19,22 @@ def nash_equilibrium(matrix):
     else:
         return "There is no simple dominant strategy."
 
+def update_lux_frequency(matrix, current_lux, dt):
+    population = np.array([current_lux, 1 - current_lux])
+
+    fitness = matrix @ population
+    lux_fitness = fitness[0]
+    average_fitness = population @ fitness
+
+    next_lux = current_lux + dt * current_lux * (lux_fitness - average_fitness)
+
+    if next_lux < 0:
+        next_lux = 0
+    elif next_lux > 1:
+        next_lux = 1
+
+    return next_lux
+
 def main():
     high_nitrogen_matrix = np.array([
         [0.230, 0.237],
