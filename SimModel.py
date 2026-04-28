@@ -45,6 +45,31 @@ def simulate(matrix, starting_lux, steps=1000, dt=0.01):
 
     return lux_values
 
+def run_condition(matrix, condition_name):
+    print_matrix(matrix, condition_name + " Payoff Matrix:")
+    print(nash_equilibrium(matrix))
+    print()
+
+    starting_values = [0.1, 0.3, 0.5, 0.7, 0.9]
+
+    for start in starting_values:
+        results = simulate(matrix, start)
+
+        print("Starting Lux:", round(start, 2))
+        print("Final Lux:", round(results[-1], 3))
+        print("Final Marshall:", round(1 - results[-1], 3))
+        print()
+
+        plt.plot(results, label=f"Start Lux = {start}")
+
+    plt.title("Lux Frequency Over Time: " + condition_name)
+    plt.xlabel("Time Step")
+    plt.ylabel("Proportion of Lux")
+    plt.ylim(0, 1)
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 def main():
     high_nitrogen_matrix = np.array([
         [0.230, 0.237],
@@ -56,39 +81,8 @@ def main():
         [0.192, 0.234]
     ])
 
-    print_matrix(high_nitrogen_matrix, "High Nitrogen Payoff Matrix:")
-    print(nash_equilibrium(high_nitrogen_matrix))
-    print()
-
-    print_matrix(low_nitrogen_matrix, "Low Nitrogen Payoff Matrix:")
-    print(nash_equilibrium(low_nitrogen_matrix))
-    print()
-
-    starting_values = [0.1, 0.3, 0.5, 0.7, 0.9]
-
-    for start in starting_values:
-        high_results = simulate(high_nitrogen_matrix, start)
-        plt.plot(high_results, label=f"Start Lux = {start}")
-
-    plt.title("Lux Frequency Over Time: High Nitrogen")
-    plt.xlabel("Time Step")
-    plt.ylabel("Proportion of Lux")
-    plt.ylim(0, 1)
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-
-    for start in starting_values:
-        low_results = simulate(low_nitrogen_matrix, start)
-        plt.plot(low_results, label=f"Start Lux = {start}")
-
-    plt.title("Lux Frequency Over Time: Low Nitrogen")
-    plt.xlabel("Time Step")
-    plt.ylabel("Proportion of Lux")
-    plt.ylim(0, 1)
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    run_condition(high_nitrogen_matrix, "High Nitrogen")
+    run_condition(low_nitrogen_matrix, "Low Nitrogen")
 
 if __name__ == "__main__":
     main()
